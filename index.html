@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Go Map Share </title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	
+
+		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvsxoC-_bYWKs9Ml1YzGA4sCB3x46t66U"></script>
+    <script language="javascript" type="text/javascript" src="js/map.js"></script>
+  </head>
+  <body>
+  
+	<div id="control">
+		<h2>Go Map Share NGINX</h2>
+		<p>We'll help you locate your closest point of interest. Simply choose an option below to begin...</p>
+		<form method="post" id="poiForm">
+			<input id="textLongitude" type="text" name="longitude" placeholder="enter the longitude" value="40.69375">
+			<input id="textLatitude" type="text" name="latitude" placeholder="enter the latitude" value="-73.987936">
+			<button type="button" id="search" class="learnButton">Search nearby</button>
+			<div class="clear"></div>
+			<input id="textName" type="text" name="poiName" placeholder="enter the name of POI">
+			<input id="textDesc" type="text" name="poiDesc" placeholder="enter the description">
+			<button type="button" id="add" class="learnButton">Add POI</button>			
+			<div class="clear"></div>
+		</form>
+		
+		<p>If you've found interesting point, please help spread the word!</p>
+		
+		
+		<div class="clear"></div>
+		<div id="results"></div>
+	</div>
+	
+	<!-- an empty div for the map -->
+	<div id="map-canvas"></div>
+
+
+  </body>
+</html>
