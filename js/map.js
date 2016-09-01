@@ -6,7 +6,7 @@
 $(function() {
 	
 		var pList = [];
-		var pos = { x: 40.69375, y: -73.987936};
+		var pos = { x: 40.692954, y: -73.9850253};
 		var poi;
 		var allLatlng = [];
 		var tempMarkerHolder = [];
@@ -17,7 +17,7 @@ $(function() {
 	
 		//map options
 		var mapOptions = {
-			zoom: 15,
+			zoom: 18,
 			center: new google.maps.LatLng(pos.x,pos.y),
 			panControl: false,
 			panControlOptions: {
@@ -46,17 +46,17 @@ $(function() {
 		
 		pos.x = $("#textLongitude").val();
 		pos.y = $("#textLatitude").val();
-		var filter = {p1:pos, distince:1};
-		alert("begin to ajax call " + pos.x + " " + pos.y);
+	
+		//alert("begin to ajax call " + pos.x + " " + pos.y);
 		//Use the zip code and return all market ids in area.
 		$.ajax({
-			type: "POST",
+			type: "GET",
 			contentType: "application/json; charset=utf-8",
-			url: "http://mexu.cloudapp.net:8080/getNearbyPoints",
+			url: "http://mexu.cloudapp.net:8080/getNearbyPoints2?x="+pos.x+"&y="+pos.y+"&d=10",
 			dataType: 'json',
 			success: function (data) {
-				 alert("ajax success");
-				 $.each(data.results, function (i, val) {
+				 //alert("ajax success");
+				 $.each(data, function (i, val) {
 					 
 					 var myLatlng = new google.maps.LatLng(val.position.x,val.position.y);
 					 var marker = new google.maps.Marker({
@@ -84,19 +84,8 @@ $(function() {
 						
 				 }); //end of each
 				
-				//console.log(allLatlng);
-				//  Make an array of the LatLng's of the markers you want to show
-				//  Create a new viewpoint bound
-				var bounds = new google.maps.LatLngBounds ();
-				//  Go through each...
-				for (var i = 0, LtLgLen = allLatlng.length; i < LtLgLen; i++) {
-				  //  And increase the bounds to take this point
-				  bounds.extend (allLatlng[i]);
-				}
-				//  Fit these bounds to the map
-				map.fitBounds (bounds);
+				
 			},// end of success
-			data: filter
 		}) //ajax call
 
         return false; // important: prevent the form from submitting
@@ -106,16 +95,28 @@ $(function() {
 	$('#add').click(function() {
 		pos.x = $("#textLongitude").val();
 		pos.y = $("#textLatitude").val();
-		poi = {position: pos, name: $("#textName").val(), desc: $("#textDesc").val()};
+		poi = {"position": pos, "name": $("#textName").val(), "desc": $("#textDesc").val()};
+		alert(poi.position.x);
 		$.ajax({
 			type: "POST",
 			contentType: "application/json; charset=utf-8",
-			url: "http://0.0.0.0:32787/savePoint",
+			url: "http://mexu.cloudapp.net:8080/savePoint",
 			dataType: 'json',
-			success: function (data) {},
-			data: pos
+			success: function (data) {alert("POI saved");},
+			data: JSON.stringify(poi)
 		});
-	});		
+	});	
+	
+	//click get coordinate
+	google.maps.event.addListener(map, "click", function(event) {
+	    var lat = event.latLng.lat();
+	    var lng = event.latLng.lng();
+	    // populate yor box/field with lat, lng
+	    alert("Lat=" + lat + "; Lng=" + lng);
+	    $("#textLongitude").val(lat);
+		$("#textLatitude").val(lng);
+	    
+	});
 			
 });
 
