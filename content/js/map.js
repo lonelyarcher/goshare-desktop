@@ -14,7 +14,7 @@ $(function() {
 	
 		//map options
 		var mapOptions = {
-			zoom: 18,
+			zoom: 15,
 			center: new google.maps.LatLng(pos.x,pos.y),
 			panControl: false,
 			panControlOptions: {
