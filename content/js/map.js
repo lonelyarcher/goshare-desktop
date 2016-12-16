@@ -93,7 +93,7 @@ $(function() {
 		pos.x = $("#textLongitude").val();
 		pos.y = $("#textLatitude").val();
 		poi = {"position": pos, "name": $("#textName").val(), "desc": $("#textDesc").val()};
-		alert(poi.position.x);
+		//alert(poi.position.x);
 		$.ajax({
 			type: "POST",
 			contentType: "application/json; charset=utf-8",
@@ -109,7 +109,7 @@ $(function() {
 	    var lat = event.latLng.lat();
 	    var lng = event.latLng.lng();
 	    // populate yor box/field with lat, lng
-	    alert("Lat=" + lat + "; Lng=" + lng);
+	    //alert("Lat=" + lat + "; Lng=" + lng);
 	    $("#textLongitude").val(lat);
 		$("#textLatitude").val(lng);
 	    
