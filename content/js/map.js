@@ -49,7 +49,7 @@ $(function() {
 		$.ajax({
 			type: "GET",
 			contentType: "application/json; charset=utf-8",
-			url: "http://poidemo.cloudapp.net:8080/getNearbyPoints2?x="+pos.x+"&y="+pos.y+"&d=10",
+			url: "http://poi/getNearbyPoints2?x="+pos.x+"&y="+pos.y+"&d=10",
 			dataType: 'json',
 			success: function (data) {
 				 //alert("ajax success");
@@ -97,7 +97,7 @@ $(function() {
 		$.ajax({
 			type: "POST",
 			contentType: "application/json; charset=utf-8",
-			url: "http://poidemo.cloudapp.net:8080/savePoint",
+			url: "http://poi/savePoint",
 			dataType: 'json',
 			success: function (data) {alert("POI saved");},
 			data: JSON.stringify(poi)
